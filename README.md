@@ -1,4 +1,4 @@
-# Swiftmailer Css Inliner Plugin [![Build Status](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner.png?branch=master)](https://travis-ci.org/OpenBuildings/swiftmailer-filter) [![Coverage Status](https://coveralls.io/repos/OpenBuildings/swiftmailer-css-inliner/badge.png?branch=master)](https://coveralls.io/r/OpenBuildings/swiftmailer-filter?branch=master)
+# Swiftmailer Css Inliner Plugin [![Build Status](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner.png?branch=master)](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner) [![Coverage Status](https://coveralls.io/repos/OpenBuildings/swiftmailer-css-inliner/badge.png?branch=master)](https://coveralls.io/r/OpenBuildings/swiftmailer-css-inliner?branch=master)
 
 A swiftmailer plugin that inlines the css (in style tags) into the specific html tags. Uses [CssToInlineStyles](https://github.com/tijsverkoyen/CssToInlineStyles). Works for both html body or html parts.
 
