@@ -13,24 +13,6 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 class CssInlinerPlugin implements \Swift_Events_SendListener
 {
 	/**
-	 * @param Swift_Mime_Message $message
-	 * @param string $mime_type
-	 * @return Swift_Mime_MimePart
-	 */
-	protected function getMIMEPart(\Swift_Mime_Message $message, $mime_type) 
-	{
-		$part_content = NULL;
-		foreach ($message->getChildren() as $part) 
-		{
-			if (strpos($part->getContentType(), $mime_type) === 0)
-			{
-				$part_content = $part;
-			}
-		}
-		return $part_content;
-	}
-
-	/**
 	 * @param Swift_Events_SendEvent $evt
 	 */
 	public function beforeSendPerformed(\Swift_Events_SendEvent $evt)
