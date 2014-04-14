@@ -50,7 +50,7 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 
 	public function test_default_converter_uses_inline_styles_block()
 	{
-		$plugin = new CssInlinerPlugin($converterStub);
+		$plugin = new CssInlinerPlugin();
 
 		$converter = \PHPUnit_Framework_Assert::readAttribute($plugin, 'converter');
 
