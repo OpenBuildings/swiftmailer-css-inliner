@@ -13,32 +13,51 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 class CssInlinerPlugin implements \Swift_Events_SendListener
 {
 	/**
+	 * @var CssToInlineStyles
+	 */
+	private $converter;
+
+	/**
+	 * @param CssToInlineStyles $converter
+	 */
+	public function __construct(CssToInlineStyles $converter = null)
+	{
+		if ($converter)
+		{
+			$this->converter = $converter;
+		}
+		else
+		{
+			$this->converter = new CssToInlineStyles();
+			$this->converter->setUseInlineStylesBlock(TRUE);
+		}
+	}
+
+	/**
 	 * @param Swift_Events_SendEvent $evt
 	 */
 	public function beforeSendPerformed(\Swift_Events_SendEvent $evt)
 	{
 		$message = $evt->getMessage();
 
-		$converter = new CssToInlineStyles();
-		$converter->setEncoding($message->getCharset());
-		$converter->setUseInlineStylesBlock(TRUE);
+		$this->converter->setEncoding($message->getCharset());
 
-		if ($message->getContentType() === 'text/html') 
+		if ($message->getContentType() === 'text/html')
 		{
-			$converter->setCSS('');
-			$converter->setHTML($message->getBody());
+			$this->converter->setCSS('');
+			$this->converter->setHTML($message->getBody());
 
-			$message->setBody($converter->convert());
+			$message->setBody($this->converter->convert());
 		}
 
-		foreach ($message->getChildren() as $part) 
+		foreach ($message->getChildren() as $part)
 		{
 			if (strpos($part->getContentType(), 'text/html') === 0)
 			{
-				$converter->setCSS('');
-				$converter->setHTML($part->getBody());
+				$this->converter->setCSS('');
+				$this->converter->setHTML($part->getBody());
 
-				$part->setBody($converter->convert());
+				$part->setBody($this->converter->convert());
 			}
 		}
 	}

@@ -48,6 +48,42 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($this->email_converted, $children[0]->getBody());
 	}
 
+	public function test_default_converter_uses_inline_styles_block()
+	{
+		$plugin = new CssInlinerPlugin($converterStub);
+
+		$converter = \PHPUnit_Framework_Assert::readAttribute($plugin, 'converter');
+
+		$this->assertTrue(
+			\PHPUnit_Framework_Assert::readAttribute($converter, 'useInlineStylesBlock'),
+			'setUseInlineStylesBlock() should be called on default $converter'
+		);
+	}
+
+	public function test_injected_conveter_is_used_istead_of_default()
+	{
+		$converterStub = $this
+			->getMockBuilder('TijsVerkoyen\CssToInlineStyles\CssToInlineStyles')
+			->setMethods(array('convert', 'setUseInlineStylesBlock'))
+			->getMock();
+
+		// "our" converter should be used
+		$converterStub
+			->expects($this->atLeastOnce())
+			->method('convert');
+
+		$converterStub
+			->expects($this->never())
+			->method('setUseInlineStylesBlock');
+
+		$message = $this->create_message();
+		$message->setContentType('text/html');
+
+		$mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
+		$mailer->registerPlugin(new CssInlinerPlugin($converterStub));
+		$mailer->send($message);
+	}
+
 	protected function setUp()
 	{
 		$dir = __DIR__.'/../fixtures/';
