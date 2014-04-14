@@ -8,6 +8,11 @@ use Openbuildings\Swiftmailer\CssInlinerPlugin;
 class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 {
 	/**
+	 * @var Swift_Mailer
+	 */
+	private $mailer;
+
+	/**
 	 * @var string
 	 */
 	private $email_raw;
@@ -19,38 +24,24 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 
 	public function test_html_body()
 	{
-		$mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
+		$message = $this->create_message();
 
-		$mailer->registerPLugin(new CssInlinerPlugin());
-
-		$message = Swift_Message::newInstance();
-
-		$message->setFrom('test@example.com');
-		$message->setTo('test2@example.com');
-		$message->setSubject('Test');
 		$message->setContentType('text/html');
 		$message->setBody($this->email_raw);
 
-		$mailer->send($message);
+		$this->mailer->send($message);
 
 		$this->assertEquals($this->email_converted, $message->getBody());
 	}
 
 	public function test_html_part()
 	{
-		$mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
+		$message = $this->create_message();
 
-		$mailer->registerPLugin(new CssInlinerPlugin());
-
-		$message = Swift_Message::newInstance();
-
-		$message->setFrom('test@example.com');
-		$message->setTo('test2@example.com');
-		$message->setSubject('Test');
 		$message->addPart($this->email_raw, 'text/html');
 		$message->addPart('plain part', 'text/plain');
 
-		$mailer->send($message);
+		$this->mailer->send($message);
 
 		$children = $message->getChildren();
 
@@ -63,5 +54,22 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 
 		$this->email_raw = file_get_contents($dir.'email_raw.html');
 		$this->email_converted = file_get_contents($dir.'email_converted.html');
+
+		$this->mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
+		$this->mailer->registerPLugin(new CssInlinerPlugin());
+	}
+
+	/**
+	 * @return Swift_Message
+	 */
+	private function create_message()
+	{
+		$message = Swift_Message::newInstance();
+
+		$message->setFrom('test@example.com');
+		$message->setTo('test2@example.com');
+		$message->setSubject('Test');
+
+		return $message;
 	}
 }
