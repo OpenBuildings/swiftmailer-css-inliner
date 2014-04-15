@@ -14,6 +14,19 @@ $mailer = Swift_Mailer::newInstance();
 $mailer->registerPLugin(new CssInlinerPlugin());
 ```
 
+You can set custom parameters by providing your own CssToInlineStyles object. Like this
+
+```php
+use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
+
+$mailer = Swift_Mailer::newInstance();
+
+$converter = new CssToInlineStyles();
+$converter->setUseInlineStylesBlock(FALSE);
+
+$mailer->registerPLugin(new CssInlinerPlugin($converter));
+```
+
 ## License
 
 Copyright (c) 2013, OpenBuildings Ltd. Developed by Ivan Kerin as part of [clippings.com](http://clippings.com)
