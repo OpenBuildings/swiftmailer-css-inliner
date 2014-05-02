@@ -19,18 +19,19 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
 	/**
 	 * @var array Default config
 	 *
-	 * ['useInlineStylesBlock' => true] means that it will run setUseInlineStylesBlock(true) method of CssToInlineStyles:
+	 * array('useInlineStylesBlock' => TRUE)
+	 * means that setUseInlineStylesBlock(TRUE) method of CssToInlineStyles will be executed:
 	 * @see TijsVerkoyen\CssToInlineStyles\CssToInlineStyles::setUseInlineStylesBlock()
 	 */
-	protected $config = [
+	protected $config = array(
 		'useInlineStylesBlock' => TRUE,
-	];
+	);
 
 	/**
 	 * @param CssToInlineStyles|null $converter
 	 * @param array $options
 	 */
-	public function __construct(CssToInlineStyles $converter = null, array $options = [])
+	public function __construct(CssToInlineStyles $converter = null, array $options = array())
 	{
 		if ($converter)
 		{
