@@ -18,23 +18,35 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
 	private $converter;
 
 	/**
-	 * @param CssToInlineStyles $converter
+	 * @param CssToInlineStyles|array|null $dynamicParam
 	 */
-	public function __construct(CssToInlineStyles $converter = null)
+	public function __construct($dynamicParam = null)
 	{
-		if ($converter)
+		if ($dynamicParam instanceof CssToInlineStyles)
 		{
-			$this->converter = $converter;
+			$this->converter = $dynamicParam;
 		}
 		else
 		{
 			$this->converter = new CssToInlineStyles();
 			$this->converter->setUseInlineStylesBlock(TRUE);
+
+			if (is_array($dynamicParam) && sizeof($dynamicParam))
+			{
+				foreach ($dynamicParam as $param => $val)
+				{
+					$methodName = 'set'.ucfirst($param);
+					if (method_exists($this->converter, $methodName))
+					{
+						$this->converter->$methodName($val);
+					}
+				}
+			}
 		}
 	}
 
 	/**
-	 * @param Swift_Events_SendEvent $evt
+	 * @param \Swift_Events_SendEvent $evt
 	 */
 	public function beforeSendPerformed(\Swift_Events_SendEvent $evt)
 	{
@@ -65,7 +77,7 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
 	/**
 	 * Do nothing
 	 *
-	 * @param Swift_Events_SendEvent $evt
+	 * @param \Swift_Events_SendEvent $evt
 	 */
 	public function sendPerformed(\Swift_Events_SendEvent $evt)
 	{
