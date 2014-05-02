@@ -18,37 +18,38 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
 	private $converter;
 	/**
 	 * @var array Default config
-	 *
-	 * array('useInlineStylesBlock' => TRUE)
-	 * means that setUseInlineStylesBlock(TRUE) method of CssToInlineStyles will be executed:
-	 * @see TijsVerkoyen\CssToInlineStyles\CssToInlineStyles::setUseInlineStylesBlock()
 	 */
 	protected $config = array(
 		'useInlineStylesBlock' => TRUE,
 	);
 
 	/**
-	 * @param CssToInlineStyles|null $converter
-	 * @param array $options
+	 * @param CssToInlineStyles|array|null $dynamicParam
 	 */
-	public function __construct(CssToInlineStyles $converter = null, array $options = array())
+	public function __construct($dynamicParam = null)
 	{
-		if ($converter)
+		if ($dynamicParam instanceof CssToInlineStyles)
 		{
-			$this->converter = $converter;
+			$this->converter = $dynamicParam;
 		}
 		else
 		{
 			$this->converter = new CssToInlineStyles();
-		}
 
-		$this->config = array_merge($this->config, $options);
-		foreach ($this->config as $param => $val)
-		{
-			$methodName = 'set'.ucfirst($param);
-			if (method_exists($this->converter, $methodName))
+			if (is_array($dynamicParam))
 			{
-				$this->converter->$methodName($val);
+				$this->config = array_merge($this->config, $dynamicParam);
+			}
+			if (sizeof($this->config))
+			{
+				foreach ($this->config as $param => $val)
+				{
+					$methodName = 'set'.ucfirst($param);
+					if (method_exists($this->converter, $methodName))
+					{
+						$this->converter->$methodName($val);
+					}
+				}
 			}
 		}
 	}
