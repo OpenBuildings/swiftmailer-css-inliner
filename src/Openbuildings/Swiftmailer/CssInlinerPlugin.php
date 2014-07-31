@@ -30,6 +30,7 @@ class CssInlinerPlugin implements \Swift_Events_SendListener
 		{
 			$this->converter = new CssToInlineStyles();
 			$this->converter->setUseInlineStylesBlock(TRUE);
+			$this->converter->setExcludeMediaQueries(TRUE);
 		}
 	}
 
