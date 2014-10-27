@@ -9,6 +9,8 @@ A swiftmailer plugin that inlines the css (in style tags) into the specific html
 ## Usage
 
 ```php
+use Openbuildings\Swiftmailer\CssInlinerPlugin;
+
 $mailer = Swift_Mailer::newInstance();
 
 $mailer->registerPLugin(new CssInlinerPlugin());
@@ -17,6 +19,7 @@ $mailer->registerPLugin(new CssInlinerPlugin());
 You can set custom parameters by providing your own CssToInlineStyles object. Like this
 
 ```php
+use Openbuildings\Swiftmailer\CssInlinerPlugin;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 $mailer = Swift_Mailer::newInstance();
