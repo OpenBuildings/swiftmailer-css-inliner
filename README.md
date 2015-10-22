@@ -1,7 +1,7 @@
 # Swiftmailer Css Inliner Plugin 
 
 [![Build Status](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner.png?branch=master)](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner)
-[![Coverage Status](https://coveralls.io/repos/OpenBuildings/swiftmailer-css-inliner/badge.png?branch=master)](https://coveralls.io/r/OpenBuildings/swiftmailer-css-inliner?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/openbuildings/swiftmailer-css-inliner/v/stable.png)](https://packagist.org/packages/openbuildings/swiftmailer-css-inliner)
 
