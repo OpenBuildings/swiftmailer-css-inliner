@@ -55,7 +55,8 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @return ::beforeSendPerformed
+	 * @covers ::beforeSendPerformed
+	 * @covers ::sendPerformed
 	 */
 	public function testHtmlBody()
 	{
@@ -70,7 +71,7 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @return ::beforeSendPerformed
+	 * @covers ::beforeSendPerformed
 	 */
 	public function testHtmlPart()
 	{
@@ -87,7 +88,7 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @return ::__construct
+	 * @covers ::__construct
 	 */
 	public function testDefaultConverterUsesInlineStylesBlock()
 	{
@@ -105,8 +106,8 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @return ::__construct
-	 * @return ::beforeSendPerformed
+	 * @covers ::__construct
+	 * @covers ::beforeSendPerformed
 	 */
 	public function testInjectedConveterIsUsedIsteadOfDefault()
 	{
