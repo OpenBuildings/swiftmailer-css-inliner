@@ -1,4 +1,4 @@
-# Swiftmailer Css Inliner Plugin 
+# Swiftmailer Css Inliner Plugin
 
 [![Build Status](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner.svg)](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner)
 [![Code Coverage](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/?branch=master)
@@ -26,13 +26,13 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 $mailer = Swift_Mailer::newInstance();
 
 $converter = new CssToInlineStyles();
-$converter->setUseInlineStylesBlock(FALSE);
+$converter->setUseInlineStylesBlock(false);
 
 $mailer->registerPLugin(new CssInlinerPlugin($converter));
 ```
 
 ## License
 
-Copyright (c) 2013, OpenBuildings Ltd. Developed by Ivan Kerin as part of [clippings.com](http://clippings.com)
+Copyright (c) 2015, Clippings Ltd. Developed by Ivan Kerin as part of [clippings.com](http://clippings.com)
 
 Under BSD-3-Clause license, read LICENSE file.
