@@ -14,7 +14,7 @@ use Openbuildings\Swiftmailer\CssInlinerPlugin;
 
 $mailer = Swift_Mailer::newInstance();
 
-$mailer->registerPLugin(new CssInlinerPlugin());
+$mailer->registerPlugin(new CssInlinerPlugin());
 ```
 
 You can set custom parameters by providing your own CssToInlineStyles object. Like this
@@ -28,7 +28,7 @@ $mailer = Swift_Mailer::newInstance();
 $converter = new CssToInlineStyles();
 $converter->setUseInlineStylesBlock(false);
 
-$mailer->registerPLugin(new CssInlinerPlugin($converter));
+$mailer->registerPlugin(new CssInlinerPlugin($converter));
 ```
 
 ## License
