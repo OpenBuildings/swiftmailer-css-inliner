@@ -109,7 +109,7 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 	 * @covers ::__construct
 	 * @covers ::beforeSendPerformed
 	 */
-	public function testInjectedConveterIsUsedIsteadOfDefault()
+	public function testInjectedConverterIsUsedInsteadOfDefault()
 	{
 		$converterStub = $this
 			->getMockBuilder('TijsVerkoyen\CssToInlineStyles\CssToInlineStyles')
