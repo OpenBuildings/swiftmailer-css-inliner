@@ -113,7 +113,7 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 	{
 		$converterStub = $this
 			->getMockBuilder('TijsVerkoyen\CssToInlineStyles\CssToInlineStyles')
-			->setMethods(['convert', 'setUseInlineStylesBlock'])
+			->setMethods(array('convert', 'setUseInlineStylesBlock'))
 			->getMock();
 
 		// "our" converter should be used
