@@ -3,11 +3,28 @@ language: php
 sudo: false
 
 php:
+  - 5.3
   - 5.4
   - 5.5
   - 5.6
-  - 7
+  - 7.0
+  - 7.1
   - hhvm
+
+env:
+  - DEPS=normal
+  - DEPS=highest
+  - DEPS=lowest
+
+matrix:
+  fast_finish: true
+  exclude:
+    - php: hhvm
+      env: DEPS=lowest
+
+branches:
+  only:
+    - master
 
 cache:
   directories:
@@ -18,17 +35,18 @@ notifications:
   slack:
     secure: ixWu6kWtNIlzzdImpu4MdvGYpA6ZPp/dQpMAp6FDO2oHHB55J9ossBYtVtBXPCDs9OxqfQl2yqbE+TkhfIfkZqIbhvX2+CiIomvYSKZDvryUlCfbfV29behmSVIVYvg3b8Tba+nAyZeJA2guUyAy02WGr3n4I+PDgZC3Wa/mv94=
 
-before_install:
-  - composer selfupdate
+before_install: travis_retry composer selfupdate
 
 install:
-  - composer install
+  - if [ "$DEPS" = "normal" ]; then travis_retry composer install --no-interaction; fi;
+  - if [ "$DEPS" = "highest" ]; then travis_retry composer update --no-interaction; fi;
+  - if [ "$DEPS" = "lowest" ]; then travis_retry composer update --no-interaction --prefer-lowest --prefer-stable; fi;
 
 before_script:
   - mkdir -p build/logs
 
 script:
-  - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/phpunit --stop-on-error --stop-on-failure --coverage-clover build/logs/clover.xml
 
 after_script:
   - test -e build/logs/clover.xml && wget https://scrutinizer-ci.com/ocular.phar
