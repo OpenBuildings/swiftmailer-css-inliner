@@ -28,7 +28,6 @@ class CssInlinerPlugin implements Swift_Events_SendListener
 			$this->converter = $converter;
 		} else {
 			$this->converter = new CssToInlineStyles();
-			$this->converter->setUseInlineStylesBlock(true);
 		}
 	}
 
@@ -40,18 +39,12 @@ class CssInlinerPlugin implements Swift_Events_SendListener
 		$message = $event->getMessage();
 
 		if ($message->getContentType() === 'text/html') {
-			$this->converter->setCSS('');
-			$this->converter->setHTML($message->getBody());
-
-			$message->setBody($this->converter->convert());
+			$message->setBody($this->converter->convert($message->getBody()));
 		}
 
 		foreach ($message->getChildren() as $part) {
 			if (strpos($part->getContentType(), 'text/html') === 0) {
-				$this->converter->setCSS('');
-				$this->converter->setHTML($part->getBody());
-
-				$part->setBody($this->converter->convert());
+				$part->setBody($this->converter->convert($part->getBody()));
 			}
 		}
 	}

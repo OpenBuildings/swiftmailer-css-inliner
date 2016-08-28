@@ -89,24 +89,6 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers ::__construct
-	 */
-	public function testDefaultConverterUsesInlineStylesBlock()
-	{
-		$plugin = new CssInlinerPlugin();
-
-		$converter = PHPUnit_Framework_Assert::readAttribute($plugin, 'converter');
-
-		$this->assertTrue(
-			PHPUnit_Framework_Assert::readAttribute(
-				$converter,
-				'useInlineStylesBlock'
-			),
-			'setUseInlineStylesBlock() should be called on default $converter'
-		);
-	}
-
-	/**
-	 * @covers ::__construct
 	 * @covers ::beforeSendPerformed
 	 */
 	public function testInjectedConverterIsUsedInsteadOfDefault()
