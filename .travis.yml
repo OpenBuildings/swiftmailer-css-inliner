@@ -34,8 +34,7 @@ notifications:
   slack:
     secure: ixWu6kWtNIlzzdImpu4MdvGYpA6ZPp/dQpMAp6FDO2oHHB55J9ossBYtVtBXPCDs9OxqfQl2yqbE+TkhfIfkZqIbhvX2+CiIomvYSKZDvryUlCfbfV29behmSVIVYvg3b8Tba+nAyZeJA2guUyAy02WGr3n4I+PDgZC3Wa/mv94=
 
-before_install:
-  - composer selfupdate
+before_install: travis_retry composer selfupdate
 
 install:
   - if [ "$DEPS" = "normal" ]; then travis_retry composer install --no-interaction; fi;
