@@ -10,6 +10,17 @@ php:
   - 7.1
   - hhvm
 
+env:
+  - DEPS=normal
+  - DEPS=highest
+  - DEPS=lowest
+
+matrix:
+  fast_finish: true
+  exclude:
+    - php: hhvm
+      env: DEPS=lowest
+
 branches:
   only:
     - master
@@ -27,7 +38,9 @@ before_install:
   - composer selfupdate
 
 install:
-  - composer install
+  - if [ "$DEPS" = "normal" ]; then travis_retry composer install --no-interaction; fi;
+  - if [ "$DEPS" = "highest" ]; then travis_retry composer update --no-interaction; fi;
+  - if [ "$DEPS" = "lowest" ]; then travis_retry composer update --no-interaction --prefer-lowest --prefer-stable; fi;
 
 before_script:
   - mkdir -p build/logs
