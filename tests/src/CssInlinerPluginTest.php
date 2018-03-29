@@ -4,7 +4,6 @@ namespace Openbuildings\Swiftmailer\Test;
 
 use Openbuildings\Swiftmailer\CssInlinerPlugin;
 use PHPUnit_Framework_TestCase;
-use PHPUnit_Framework_Assert;
 use Swift_Mailer;
 use Swift_Message;
 use Swift_NullTransport;
