@@ -66,7 +66,7 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 
 		$this->mailer->send($message);
 
-		$this->assertEquals($this->emailConverted, $message->getBody());
+		$this->assertStringEqualsStringWithoutIndentation($this->emailConverted, $message->getBody());
 	}
 
 	/**
@@ -83,7 +83,7 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 
 		$children = $message->getChildren();
 
-		$this->assertEquals($this->emailConverted, $children[0]->getBody());
+		$this->assertStringEqualsStringWithoutIndentation($this->emailConverted, $children[0]->getBody());
 	}
 
 	/**
@@ -112,5 +112,20 @@ class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 		$mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
 		$mailer->registerPlugin(new CssInlinerPlugin($converterStub));
 		$mailer->send($message);
+	}
+
+	/**
+	 * This assert is an ugly hack aiming to fix an indent issue when using libxml < 2.9.5.
+	 *
+	 * @param string $expected
+	 * @param string $actual
+	 * @param string $message
+	 */
+	private function assertStringEqualsStringWithoutIndentation($expected, $actual, $message = '')
+	{
+		$expected = preg_replace('/^[[:space:]]+|\n/m', '', $expected);
+		$actual = preg_replace('/^[[:space:]]+|\n/m', '', $actual);
+
+		$this->assertEquals($expected, $actual, $message);
 	}
 }
