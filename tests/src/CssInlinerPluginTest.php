@@ -13,119 +13,119 @@ use Swift_NullTransport;
  */
 class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var Swift_Mailer
-	 */
-	private $mailer;
+    /**
+     * @var Swift_Mailer
+     */
+    private $mailer;
 
-	/**
-	 * @var string
-	 */
-	private $emailRaw;
+    /**
+     * @var string
+     */
+    private $emailRaw;
 
-	/**
-	 * @var string
-	 */
-	private $emailConverted;
+    /**
+     * @var string
+     */
+    private $emailConverted;
 
-	public function setUp()
-	{
-		$dir = __DIR__.'/../fixtures/';
+    public function setUp()
+    {
+        $dir = __DIR__.'/../fixtures/';
 
-		$this->emailRaw = file_get_contents($dir.'emailRaw.html');
-		$this->emailConverted = file_get_contents($dir.'emailConverted.html');
+        $this->emailRaw = file_get_contents($dir.'emailRaw.html');
+        $this->emailConverted = file_get_contents($dir.'emailConverted.html');
 
-		$this->mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
-		$this->mailer->registerPLugin(new CssInlinerPlugin());
-	}
+        $this->mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
+        $this->mailer->registerPLugin(new CssInlinerPlugin());
+    }
 
-	/**
-	 * @return Swift_Message
-	 */
-	private function createMessage()
-	{
-		$message = Swift_Message::newInstance();
+    /**
+     * @return Swift_Message
+     */
+    private function createMessage()
+    {
+        $message = Swift_Message::newInstance();
 
-		$message->setFrom('test@example.com');
-		$message->setTo('test2@example.com');
-		$message->setSubject('Test');
+        $message->setFrom('test@example.com');
+        $message->setTo('test2@example.com');
+        $message->setSubject('Test');
 
-		return $message;
-	}
+        return $message;
+    }
 
-	/**
-	 * @covers ::beforeSendPerformed
-	 * @covers ::sendPerformed
-	 */
-	public function testHtmlBody()
-	{
-		$message = $this->createMessage();
+    /**
+     * @covers ::beforeSendPerformed
+     * @covers ::sendPerformed
+     */
+    public function testHtmlBody()
+    {
+        $message = $this->createMessage();
 
-		$message->setContentType('text/html');
-		$message->setBody($this->emailRaw);
+        $message->setContentType('text/html');
+        $message->setBody($this->emailRaw);
 
-		$this->mailer->send($message);
+        $this->mailer->send($message);
 
-		$this->assertStringEqualsStringWithoutIndentation($this->emailConverted, $message->getBody());
-	}
+        $this->assertStringEqualsStringWithoutIndentation($this->emailConverted, $message->getBody());
+    }
 
-	/**
-	 * @covers ::beforeSendPerformed
-	 */
-	public function testHtmlPart()
-	{
-		$message = $this->createMessage();
+    /**
+     * @covers ::beforeSendPerformed
+     */
+    public function testHtmlPart()
+    {
+        $message = $this->createMessage();
 
-		$message->addPart($this->emailRaw, 'text/html');
-		$message->addPart('plain part', 'text/plain');
+        $message->addPart($this->emailRaw, 'text/html');
+        $message->addPart('plain part', 'text/plain');
 
-		$this->mailer->send($message);
+        $this->mailer->send($message);
 
-		$children = $message->getChildren();
+        $children = $message->getChildren();
 
-		$this->assertStringEqualsStringWithoutIndentation($this->emailConverted, $children[0]->getBody());
-	}
+        $this->assertStringEqualsStringWithoutIndentation($this->emailConverted, $children[0]->getBody());
+    }
 
-	/**
-	 * @covers ::__construct
-	 * @covers ::beforeSendPerformed
-	 */
-	public function testInjectedConverterIsUsedInsteadOfDefault()
-	{
-		$converterStub = $this
-			->getMockBuilder('TijsVerkoyen\CssToInlineStyles\CssToInlineStyles')
-			->setMethods(array('convert', 'setUseInlineStylesBlock'))
-			->getMock();
+    /**
+     * @covers ::__construct
+     * @covers ::beforeSendPerformed
+     */
+    public function testInjectedConverterIsUsedInsteadOfDefault()
+    {
+        $converterStub = $this
+            ->getMockBuilder('TijsVerkoyen\CssToInlineStyles\CssToInlineStyles')
+            ->setMethods(array('convert', 'setUseInlineStylesBlock'))
+            ->getMock();
 
-		// "our" converter should be used
-		$converterStub
-			->expects($this->atLeastOnce())
-			->method('convert');
+        // "our" converter should be used
+        $converterStub
+            ->expects($this->atLeastOnce())
+            ->method('convert');
 
-		$converterStub
-			->expects($this->never())
-			->method('setUseInlineStylesBlock');
+        $converterStub
+            ->expects($this->never())
+            ->method('setUseInlineStylesBlock');
 
-		$message = $this->createMessage();
-		$message->setContentType('text/html');
+        $message = $this->createMessage();
+        $message->setContentType('text/html');
 
-		$mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
-		$mailer->registerPlugin(new CssInlinerPlugin($converterStub));
-		$mailer->send($message);
-	}
+        $mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
+        $mailer->registerPlugin(new CssInlinerPlugin($converterStub));
+        $mailer->send($message);
+    }
 
-	/**
-	 * This assert is an ugly hack aiming to fix an indent issue when using libxml < 2.9.5.
-	 *
-	 * @param string $expected
-	 * @param string $actual
-	 * @param string $message
-	 */
-	private function assertStringEqualsStringWithoutIndentation($expected, $actual, $message = '')
-	{
-		$expected = preg_replace('/^[[:space:]]+|\n/m', '', $expected);
-		$actual = preg_replace('/^[[:space:]]+|\n/m', '', $actual);
+    /**
+     * This assert is an ugly hack aiming to fix an indent issue when using libxml < 2.9.5.
+     *
+     * @param string $expected
+     * @param string $actual
+     * @param string $message
+     */
+    private function assertStringEqualsStringWithoutIndentation($expected, $actual, $message = '')
+    {
+        $expected = preg_replace('/^[[:space:]]+|\n/m', '', $expected);
+        $actual = preg_replace('/^[[:space:]]+|\n/m', '', $actual);
 
-		$this->assertEquals($expected, $actual, $message);
-	}
+        $this->assertEquals($expected, $actual, $message);
+    }
 }
