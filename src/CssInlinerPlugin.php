@@ -44,12 +44,10 @@ class CssInlinerPlugin implements Swift_Events_SendListener
 	}
 
 	/**
-	 * Do nothing
-	 *
 	 * @param Swift_Events_SendEvent $event
 	 */
-	public function sendPerformed(\Swift_Events_SendEvent $event)
+	public function sendPerformed(Swift_Events_SendEvent $event)
 	{
-		// Do Nothing
+		// Do nothing after sending the message
 	}
 }
