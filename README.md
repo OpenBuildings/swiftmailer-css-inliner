@@ -33,6 +33,7 @@ $mailer->registerPlugin(new CssInlinerPlugin($converter));
 
 ## License
 
-Copyright (c) 2015, Clippings Ltd. Developed by Ivan Kerin as part of [clippings.com](http://clippings.com)
+Copyright &copy; [Clippings Ltd.](https://clippings.com)
+and [contributors](https://github.com/OpenBuildings/swiftmailer-css-inliner/graphs/contributors).
 
-Under BSD-3-Clause license, read LICENSE file.
+Under BSD-3-Clause license, read [LICENSE](https://github.com/OpenBuildings/swiftmailer-css-inliner/blob/master/LICENSE) file.

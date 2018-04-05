@@ -6,12 +6,6 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 use Swift_Events_SendListener;
 use Swift_Events_SendEvent;
 
-/**
- * @package    openbuildings\swiftmailer-css-inliner
- * @author     Ivan Kerin <ikerin@gmail.com>
- * @copyright  (c) 2013 OpenBuildings Ltd.
- * @license    http://spdx.org/licenses/BSD-3-Clause
- */
 class CssInlinerPlugin implements Swift_Events_SendListener
 {
 	/**
