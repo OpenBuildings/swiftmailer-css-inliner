@@ -1,11 +1,8 @@
-# Swiftmailer Css Inliner Plugin
+# Swift Mailer CSS Inliner [![Build Status](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner.svg)](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner) [![Code Coverage](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/?branch=master) [![Latest Stable Version](https://poser.pugx.org/openbuildings/swiftmailer-css-inliner/v/stable.png)](https://packagist.org/packages/openbuildings/swiftmailer-css-inliner)
 
-[![Build Status](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner.svg)](https://travis-ci.org/OpenBuildings/swiftmailer-css-inliner)
-[![Code Coverage](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/OpenBuildings/swiftmailer-css-inliner/?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/openbuildings/swiftmailer-css-inliner/v/stable.png)](https://packagist.org/packages/openbuildings/swiftmailer-css-inliner)
-
-A swiftmailer plugin that inlines the css (in style tags) into the specific html tags. Uses [CssToInlineStyles](https://github.com/tijsverkoyen/CssToInlineStyles). Works for both html body or html parts.
+Swift Mailer plugin inlining the CSS (in style tags) into the specific html tags.
+Uses [CssToInlineStyles](https://github.com/tijsverkoyen/CssToInlineStyles).
+Works for both html body or html parts.
 
 ## Usage
 
@@ -33,6 +30,7 @@ $mailer->registerPlugin(new CssInlinerPlugin($converter));
 
 ## License
 
-Copyright (c) 2015, Clippings Ltd. Developed by Ivan Kerin as part of [clippings.com](http://clippings.com)
+Copyright &copy; [Clippings Ltd.](https://clippings.com)
+and [contributors](https://github.com/OpenBuildings/swiftmailer-css-inliner/graphs/contributors).
 
-Under BSD-3-Clause license, read LICENSE file.
+Under BSD-3-Clause license, read [LICENSE](https://github.com/OpenBuildings/swiftmailer-css-inliner/blob/master/LICENSE) file.
