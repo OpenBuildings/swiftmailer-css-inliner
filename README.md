@@ -30,7 +30,7 @@ $mailer->registerPlugin(new CssInlinerPlugin($converter));
 
 ## License
 
-Copyright &copy; [Clippings Ltd.](https://clippings.com).
+Copyright &copy; [Clippings Ltd](https://clippings.com).
 Created by [Clippings team](https://clippings.github.io/join-us/) and [contributors](https://github.com/OpenBuildings/swiftmailer-css-inliner/graphs/contributors).
 
 Under BSD-3-Clause license, read [LICENSE](https://github.com/OpenBuildings/swiftmailer-css-inliner/blob/master/LICENSE) file.
