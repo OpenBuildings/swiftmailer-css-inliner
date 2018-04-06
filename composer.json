@@ -10,7 +10,7 @@
         }
     ],
     "require" : {
-        "php": ">=5.4",
+        "php": ">=5.5",
         "swiftmailer/swiftmailer": "^5.1",
         "tijsverkoyen/css-to-inline-styles": "^2.1, <2.2"
     },
@@ -30,7 +30,7 @@
     },
     "config": {
         "platform": {
-            "php": "5.4"
+            "php": "5.5"
         }
     }
 }
