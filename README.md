@@ -4,6 +4,12 @@ Swift Mailer plugin inlining the CSS (in style tags) into the specific html tags
 Uses [CssToInlineStyles](https://github.com/tijsverkoyen/CssToInlineStyles).
 Works for both html body or html parts.
 
+## Installation
+
+```bash
+$ composer require openbuildings/swiftmailer-css-inliner
+```
+
 ## Usage
 
 ```php
