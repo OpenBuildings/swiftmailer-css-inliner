@@ -3,7 +3,6 @@ language: php
 sudo: false
 
 php:
-  - 5.6
   - 7.0
   - 7.1
   - 7.2
@@ -15,11 +14,6 @@ env:
 
 matrix:
   fast_finish: true
-  exclude:
-    - php: 7.2
-      env: DEPS=normal
-    - php: 7.2
-      env: DEPS=lowest
 
 branches:
   only:

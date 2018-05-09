@@ -3,7 +3,7 @@
 namespace Openbuildings\Swiftmailer\Test;
 
 use Openbuildings\Swiftmailer\CssInlinerPlugin;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Swift_Mailer;
 use Swift_Message;
 use Swift_NullTransport;
@@ -11,7 +11,7 @@ use Swift_NullTransport;
 /**
  * @coversDefaultClass Openbuildings\Swiftmailer\CssInlinerPlugin
  */
-class CssInlinerPluginTest extends PHPUnit_Framework_TestCase
+class CssInlinerPluginTest extends TestCase
 {
     /**
      * @var Swift_Mailer
