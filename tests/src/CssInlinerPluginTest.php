@@ -35,7 +35,7 @@ class CssInlinerPluginTest extends TestCase
         $this->emailRaw = file_get_contents($dir.'emailRaw.html');
         $this->emailConverted = file_get_contents($dir.'emailConverted.html');
 
-        $this->mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
+        $this->mailer = new Swift_Mailer(new Swift_NullTransport);
         $this->mailer->registerPLugin(new CssInlinerPlugin());
     }
 
@@ -44,7 +44,7 @@ class CssInlinerPluginTest extends TestCase
      */
     private function createMessage()
     {
-        $message = Swift_Message::newInstance();
+        $message = new Swift_Message();
 
         $message->setFrom('test@example.com');
         $message->setTo('test2@example.com');
@@ -109,7 +109,7 @@ class CssInlinerPluginTest extends TestCase
         $message = $this->createMessage();
         $message->setContentType('text/html');
 
-        $mailer = Swift_Mailer::newInstance(Swift_NullTransport::newInstance());
+        $mailer = new Swift_Mailer(new Swift_NullTransport);
         $mailer->registerPlugin(new CssInlinerPlugin($converterStub));
         $mailer->send($message);
     }
