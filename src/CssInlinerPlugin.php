@@ -13,6 +13,8 @@ class CssInlinerPlugin implements Swift_Events_SendListener
      */
     private $converter;
 
+    protected $contentTypes = ['text/html'];
+    
     /**
      * @param CssToInlineStyles $converter
      */
