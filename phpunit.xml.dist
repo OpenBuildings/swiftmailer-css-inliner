@@ -4,7 +4,7 @@
  backupGlobals="false"
  forceCoversAnnotation="true">
   <testsuites>
-    <testsuite>
+    <testsuite name="RootTestSuite">
       <directory>tests/src</directory>
     </testsuite>
   </testsuites>
