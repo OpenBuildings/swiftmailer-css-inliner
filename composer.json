@@ -10,13 +10,13 @@
         }
     ],
     "require" : {
-        "php": ">=7.0",
+        "php": "^7.1",
         "swiftmailer/swiftmailer": "^5.1 || ^6.0",
         "tijsverkoyen/css-to-inline-styles": "^2.1"
     },
     "require-dev" : {
-        "phpunit/phpunit": "^5.7.10 || ^6.0",
-        "symfony/css-selector": "^2.0.5|^3.0"
+        "symfony/css-selector": "^2.0.5|^3.0",
+        "phpunit/phpunit": "^7"
     },
     "autoload": {
         "psr-4": {
@@ -30,7 +30,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.0"
+            "php": "7.1.8"
         }
     }
 }

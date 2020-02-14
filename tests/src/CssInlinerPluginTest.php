@@ -9,7 +9,7 @@ use Swift_Message;
 use Swift_NullTransport;
 
 /**
- * @coversDefaultClass Openbuildings\Swiftmailer\CssInlinerPlugin
+ * @coversDefaultClass \Openbuildings\Swiftmailer\CssInlinerPlugin
  */
 class CssInlinerPluginTest extends TestCase
 {

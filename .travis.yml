@@ -3,7 +3,6 @@ language: php
 sudo: false
 
 php:
-  - 7.0
   - 7.1
   - 7.2
   - 7.3
@@ -40,7 +39,7 @@ before_script:
   - mkdir -p build/logs
 
 script:
-  - ./vendor/bin/phpunit --stop-on-error --stop-on-failure --coverage-clover build/logs/clover.xml
+    - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
   - test -e build/logs/clover.xml && wget https://scrutinizer-ci.com/ocular.phar
