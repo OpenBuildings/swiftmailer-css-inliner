@@ -28,7 +28,7 @@ class CssInlinerPluginTest extends TestCase
      */
     private $emailConverted;
 
-    public function setUp()
+    public function setUp(): void 
     {
         $dir = __DIR__.'/../fixtures/';
 
