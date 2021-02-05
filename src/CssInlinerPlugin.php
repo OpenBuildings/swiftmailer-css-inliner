@@ -13,6 +13,11 @@ class CssInlinerPlugin implements Swift_Events_SendListener
      */
     private $converter;
 
+    protected $contentTypes = [
+        'text/html',
+        'multipart/alternative'
+    ];
+    
     /**
      * @param CssToInlineStyles $converter
      */
@@ -32,12 +37,12 @@ class CssInlinerPlugin implements Swift_Events_SendListener
     {
         $message = $event->getMessage();
 
-        if ($message->getContentType() === 'text/html') {
+        if (in_array($message->getContentType(), $this->contentTypes)) {
             $message->setBody($this->converter->convert($message->getBody()));
         }
 
         foreach ($message->getChildren() as $part) {
-            if (strpos($part->getContentType(), 'text/html') === 0) {
+            if (in_array($part->getContentType(), $this->contentTypes)) {
                 $part->setBody($this->converter->convert($part->getBody()));
             }
         }
